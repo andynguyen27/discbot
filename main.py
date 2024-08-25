@@ -45,7 +45,9 @@ async def dadjoke(ctx):
     await channel.send(joke)
 
 # temperature converter function
-
+@molebot.command()
+async def test(ctx):
+    await ctx.send("Man getting hit by football")
 
 
 molebot.run(MOLEBOTTOKEN)
