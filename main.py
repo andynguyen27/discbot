@@ -24,12 +24,12 @@ async def on_ready():
 async def hello(ctx):
     await ctx.send("Mom, Dad, I missed you")
 
-@molebot.command()
+@molebot.event
 async def on_member_join(member):
     channel = molebot.get_channel(1275719939587706954)
-    await channel.sent("Welcome")
+    await channel.send("Welcome")
 
-@molebot.command()
+@molebot.event
 async def on_member_remove(member):
     channel = molebot.get_channel(1275719939587706954)
     await channel.send("Goodbye")
