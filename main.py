@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 from discord.ext import commands
 import requests
-
+from temp import tempconvert
 
 load_dotenv(override=True)
 
@@ -13,12 +13,11 @@ DADJOKEAPI = os.getenv('DADJOKEAPI')
 intents = discord.Intents.all()
 molebot = commands.Bot(command_prefix = '!',intents=intents)
 
-
 @molebot.event 
 async def on_ready():
+    await molebot.tree.sync(guild=discord.Object(id=1192793808094638130))
     print("bot is ready") 
     print("-----------------------------")
-
 
 @molebot.command()
 async def hello(ctx):
@@ -44,14 +43,14 @@ async def dadjoke(ctx):
     channel = molebot.get_channel(1275719939587706954)
     await channel.send(joke)
 
-# insert temperature converter function as command - slash command?
-
-
+@molebot.tree.command(name="tempconv", description="temperature conversion", guild=discord.Object(id=1192793808094638130))
+async def tempconv(interaction: discord.Interaction, input:str):
+    result = tempconvert(input)
+    await interaction.response.send_message(result)
 
 @molebot.command()
 async def test(ctx):
     await ctx.send("Man getting hit by football")
-
 
 molebot.run(MOLEBOTTOKEN)
 
