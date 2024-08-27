@@ -10,14 +10,14 @@ load_dotenv(override=True)
 MOLEBOTTOKEN = os.getenv('MOLEBOTTOKEN')
 DADJOKEAPI = os.getenv('DADJOKEAPI')
 CHANNEL_ID = 1275719939587706954
-
+SERVER_ID = 1192793808094638130
 
 intents = discord.Intents.all()
 molebot = commands.Bot(command_prefix = '!',intents=intents)
 
 @molebot.event 
 async def on_ready():
-    await molebot.tree.sync(guild=discord.Object(id=1192793808094638130))
+    await molebot.tree.sync(guild=discord.Object(id=SERVER_ID))
     print("bot is ready") 
     print("-----------------------------")
 
@@ -45,7 +45,7 @@ async def dadjoke(ctx):
     channel = molebot.get_channel(CHANNEL_ID)
     await channel.send(joke)
 
-@molebot.tree.command(name="tempconv", description="temperature conversion", guild=discord.Object(id=1192793808094638130))
+@molebot.tree.command(name="tempconv", description="temperature conversion", guild=discord.Object(id=SERVER_ID))
 async def tempconv(interaction: discord.Interaction, input:str):
     result = tempconvert(input)
     await interaction.response.send_message(result)
