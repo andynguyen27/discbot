@@ -9,6 +9,8 @@ load_dotenv(override=True)
 
 MOLEBOTTOKEN = os.getenv('MOLEBOTTOKEN')
 DADJOKEAPI = os.getenv('DADJOKEAPI')
+CHANNEL_ID = 1275719939587706954
+
 
 intents = discord.Intents.all()
 molebot = commands.Bot(command_prefix = '!',intents=intents)
@@ -25,12 +27,12 @@ async def hello(ctx):
 
 @molebot.event
 async def on_member_join(member):
-    channel = molebot.get_channel(1275719939587706954)
+    channel = molebot.get_channel(CHANNEL_ID)
     await channel.send("Welcome")
 
 @molebot.event
 async def on_member_remove(member):
-    channel = molebot.get_channel(1275719939587706954)
+    channel = molebot.get_channel(CHANNEL_ID)
     await channel.send("Goodbye")
 
 
@@ -40,7 +42,7 @@ async def dadjoke(ctx):
     headers = {"Accept": "application/json"}
     response = requests.get(url, headers=headers)
     joke = response.json().get("joke")
-    channel = molebot.get_channel(1275719939587706954)
+    channel = molebot.get_channel(CHANNEL_ID)
     await channel.send(joke)
 
 @molebot.tree.command(name="tempconv", description="temperature conversion", guild=discord.Object(id=1192793808094638130))
