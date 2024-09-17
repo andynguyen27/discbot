@@ -1,18 +1,18 @@
-# def tempconvert(scale, temp):
-#     options = ['c','C','f','F']
+def tempconvert(scale: str, temp: int) -> str:
+    options = ['c','C','f','F']
 
-#     if scale.lower().strip() == 'f': 
-#         celsius = (temp - 32)/1.8 
-#         return (str(temp)+ " degrees Fahrenheit is equal to %.2f degrees Celsius." %celsius) 
+    if scale.lower().strip() == 'f': 
+        celsius = (temp - 32)/1.8 
+        return (str(temp)+ " degrees Fahrenheit is equal to %.2f degrees Celsius." %celsius) 
 
-#     elif scale.lower().strip() == 'c': 
-#         fahrenheit = (temp * 1.8) + 32
-#         return (str(temp)+ " degrees Celsius is equal to %.2f degrees Fahrenheit." %fahrenheit)     
+    elif scale.lower().strip() == 'c': 
+        fahrenheit = (temp * 1.8) + 32
+        return (str(temp)+ " degrees Celsius is equal to %.2f degrees Fahrenheit." %fahrenheit)     
     
-#     else: 
-#         return "Please enter 'F' or 'C for the scale'" 
+    else: 
+        return "Please enter 'F' or 'C for the scale'" 
 
-# print(tempconvert(str(input('F for Fahrenheit or C for Celsius: ')), float(input("Enter temperature: "))))
+print(tempconvert(str(input('F for Fahrenheit or C for Celsius: ')), float(input("Enter temperature: "))))
 
 
 # def tempconvert(temp_str):
@@ -37,39 +37,42 @@
 # input_str = input('Enter Temperature and Scale in this format: (100C) ')
 # print(tempconvert(input_str))
 
-def tempconvert(temp_str):
-    temp_str = temp_str.upper()  # Convert to uppercase to handle both 'F' and 'C'
+# def tempconvert(temp_str):
+#     temp_str = temp_str.upper()  # Convert to uppercase to handle both 'F' and 'C'
     
-    # Determine the scale and split accordingly
-    if 'F' in temp_str:
-        temp, scale = temp_str.split('F')
-    elif 'C' in temp_str:
-        temp, scale = temp_str.split('C')
-    else:
-        return "Invalid input. Please enter a temperature followed by 'C' or 'F'."
+#     # Determine the scale and split accordingly
+#     if 'F' in temp_str:
+#         temp, scale = temp_str.split('F')
+#     elif 'C' in temp_str:
+#         temp, scale = temp_str.split('C')
+#     else:
+#         return "Invalid input. Please enter a temperature followed by 'C' or 'F'."
     
-    temp = temp.strip()  # Remove any surrounding whitespace
+#     temp = temp.strip()  # Remove any surrounding whitespace
     
-    # Check if temp is empty after stripping whitespace
-    if not temp:
-        return "Invalid input. Please enter a valid temperature value."
+#     # Check if temp is empty after stripping whitespace
+#     if not temp:
+#         return "Invalid input. Please enter a valid temperature value."
     
-    # Convert temp to float
-    try:
-        temp = float(temp)
-    except ValueError:
-        return "Invalid input. Please enter a numeric temperature value."
+#     # Convert temp to float
+#     try:
+#         temp = float(temp)
+#     except ValueError:
+#         return "Invalid input. Please enter a numeric temperature value."
 
-    # Convert the temperature based on the scale
-    if scale == 'F':
-        converted_temp = (temp - 32) * 5/9
-        return f'{converted_temp:.2f}C'
-    else:  # scale == 'C'
-        converted_temp = (temp * 9/5) + 32
-        return f'{converted_temp:.2f}F'
+#     # Convert the temperature based on the scale
+#     if scale == 'F':
+#         converted_temp = (temp - 32) * 5/9
+#         return f'{converted_temp:.2f}C'
+#     else:  # scale == 'C'
+#         converted_temp = (temp * 9/5) + 32
+#         return f'{converted_temp:.2f}F'
 
-# Example usage
-input_str = input('Enter Temperature and Scale: ')
-print(tempconvert(input_str))
+# # Example usage
+# input_str = input('Enter Temperature and Scale: ')
+# print(tempconvert(input_str))
 
 #breaks if you input something like 100F100 or F100F
+
+# if __name__ == "__main__":
+#     main()
