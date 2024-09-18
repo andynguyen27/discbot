@@ -1,0 +1,6 @@
+fix multi server implementation - do i need to implement database?
+implement cogs
+make requirements.txt
+update readme.txt
+Dockerfile
+virustotal api filescan function testing/debugging

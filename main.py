@@ -3,6 +3,7 @@ import os
 import re
 from dotenv import load_dotenv
 from discord.ext import commands
+from discord import app_commands
 import requests
 from temp import tempconvert
 import logging
@@ -54,6 +55,10 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingPermissions):
         await ctx.send("You don't have permission to run this command")
 
+@molebot.command()
+async def sfw(ctx):
+    sfwlink = 'https://cdn.discordapp.com/attachments/1285702416096039005/1285702797622378571/dugj2lh6f6051.png?ex=66eb3b8a&is=66e9ea0a&hm=18e720217950d34ad1382990f4dc8f4940a694888c244a452f210812a540b732&'
+    await ctx.send(sfwlink)
 
 @molebot.command()
 async def dadjoke(ctx):
@@ -70,10 +75,17 @@ async def dadjoke(ctx):
 
 
 @molebot.tree.command(name="tempconv", description="temperature conversion", guild=discord.Object(id=SERVER_ID))
-async def tempconv(interaction: discord.Interaction, scale: str, temp: int):
-    result = tempconvert(input)
-    await interaction.response.send_message(result)
-# tempconv.autocomplete = app_commands.Choice(
+@app_commands.describe(unit="Select C for Celsius or F for Fahrenheit", temperature="Temperature to convert")
+@app_commands.choices(unit=[
+    app_commands.Choice(name="C", value="C"),
+    app_commands.Choice(name="F", value="F"),
+])
+async def tempconv(interaction: discord.Interaction, unit: app_commands.Choice[str], temperature: int):
+    result = tempconvert(unit.value, temperature)
+    await interaction.response.send_message(f"Converted temperature: {result}", ephemeral=True)
+# @app_commands.describe()
+
+# tempconv.autocomplete = @app_commands.Choice(
 #     name="scale",
 #     choices=[
 #         app_commands.Choice(name="Celsius", value="C"),
@@ -84,7 +96,8 @@ async def tempconv(interaction: discord.Interaction, scale: str, temp: int):
 
 @molebot.command()
 async def test(ctx):
-    await ctx.send("Man getting hit by football")
+    giflink = 'https://tenor.com/view/football-gif-22736897'
+    await ctx.send(f"Man getting hit by football\n {giflink}")
 
 
 async def download_file(url, file_name):
@@ -159,6 +172,7 @@ async def check_virus_link(message_link):
         }
 
         if int(stats_dict["malicious"])>0 or int(stats_dict["suspicious"]>0):
+            print("i'm ugly")
             bot_message = (f"Potentially malicious link. Here are the results of your scan:\n"
                f"```Malicious: {stats['malicious']}\n"
                f"Suspicious: {stats['suspicious']}\n"
@@ -216,7 +230,6 @@ async def on_message(message):
             return
         
     if message.attachments:
-        print('let me out')
         for attachment in message.attachments:
             print('jollibee')
             file_name = attachment.filename

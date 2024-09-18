@@ -1,18 +1,18 @@
-def tempconvert(scale: str, temp: int) -> str:
+def tempconvert(unit: str, temperature: int) -> str:
     options = ['c','C','f','F']
 
-    if scale.lower().strip() == 'f': 
-        celsius = (temp - 32)/1.8 
-        return (str(temp)+ " degrees Fahrenheit is equal to %.2f degrees Celsius." %celsius) 
+    if unit.lower().strip() == 'f': 
+        celsius = (temperature - 32)/1.8 
+        return (str(temperature)+ " degrees Fahrenheit is equal to %.2f degrees Celsius." %celsius) 
 
-    elif scale.lower().strip() == 'c': 
-        fahrenheit = (temp * 1.8) + 32
-        return (str(temp)+ " degrees Celsius is equal to %.2f degrees Fahrenheit." %fahrenheit)     
+    elif unit.lower().strip() == 'c': 
+        fahrenheit = (temperature * 1.8) + 32
+        return (str(temperature)+ " degrees Celsius is equal to %.2f degrees Fahrenheit." %fahrenheit)     
     
     else: 
         return "Please enter 'F' or 'C for the scale'" 
 
-print(tempconvert(str(input('F for Fahrenheit or C for Celsius: ')), float(input("Enter temperature: "))))
+# print(tempconvert(str(input('F for Fahrenheit or C for Celsius: ')), float(input("Enter temperature: "))))
 
 
 # def tempconvert(temp_str):
