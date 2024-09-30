@@ -2,3 +2,5 @@ requests
 discord
 aiohttp
 asyncio
+uvicorn
+python-dotenv

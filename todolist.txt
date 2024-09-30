@@ -4,3 +4,4 @@ make requirements.txt
 update readme.txt
 Dockerfile
 virustotal api filescan function testing/debugging
+slash function - time converter to epoch time string for discord copy/paste
