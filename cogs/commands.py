@@ -8,7 +8,7 @@ class Commands(commands.Cog):
     
     @commands.Cog.listener()
     async def on_ready(self):
-        print("Molebot is online.....")
+        print("Molebot !Commands is online.....")
 
     @commands.command()
     async def hello(self, ctx):

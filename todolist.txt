@@ -13,3 +13,5 @@ update readme.txt
 Dockerfile
 virustotal api filescan function testing/debugging
 slash funciton - time converter to epoch time string for discord copy/paste
+for /tempconv clarify what you are doing by typing C or F
+for /timeconv display local timezone

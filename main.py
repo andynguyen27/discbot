@@ -10,8 +10,9 @@ import logging
 import hashlib
 import aiohttp
 import json
-import uvicorn
+import asyncio
 from cogs.commands import Commands
+from cogs.slashcommands import SlashCommands
 
 load_dotenv(override=True)
 
@@ -39,7 +40,12 @@ delete_message = False # configure this
 
 @molebot.event 
 async def on_ready():
-    await molebot.tree.sync(guild=discord.Object(id=SERVER_ID))
+    # await molebot.tree.sync(guild=discord.Object(id=SERVER_ID))
+    try:
+        synced_commands = await molebot.tree.sync()
+        print(f"Synced {len(synced_commands)} commands.")
+    except Exception as e:
+        print("An error with syncing application commands has occurred: ", e)
     print("bot is ready") 
     print("-----------------------------")
 
@@ -87,15 +93,15 @@ async def on_command_error(ctx, error):
 #     await ctx.send(joke)
 
 
-@molebot.tree.command(name="tempconv", description="temperature conversion", guild=discord.Object(id=SERVER_ID))
-@app_commands.describe(unit="Select C for Celsius or F for Fahrenheit", temperature="Temperature to convert")
-@app_commands.choices(unit=[
-    app_commands.Choice(name="C", value="C"),
-    app_commands.Choice(name="F", value="F"),
-])
-async def tempconv(interaction: discord.Interaction, unit: app_commands.Choice[str], temperature: int):
-    result = tempconvert(unit.value, temperature)
-    await interaction.response.send_message(f"Converted temperature: {result}", ephemeral=True)
+# @molebot.tree.command(name="tempconv", description="temperature conversion", guild=discord.Object(id=SERVER_ID))
+# @app_commands.describe(unit="Select C for Celsius or F for Fahrenheit", temperature="Temperature to convert")
+# @app_commands.choices(unit=[
+#     app_commands.Choice(name="C", value="C"),
+#     app_commands.Choice(name="F", value="F"),
+# ])
+# async def tempconv(interaction: discord.Interaction, unit: app_commands.Choice[str], temperature: int):
+#     result = tempconvert(unit.value, temperature)
+#     await interaction.response.send_message(f"Converted temperature: {result}", ephemeral=True)
 # @app_commands.describe()
 
 # tempconv.autocomplete = @app_commands.Choice(
@@ -278,6 +284,7 @@ async def load():
     for filename in os.listdir("./cogs"):
         if filename.endswith(".py"):
             await molebot.load_extension(f"cogs.{filename[:-3]}")
+            print(f"loading {filename[:-3]}")
 
 
 async def main():
